@@ -4,23 +4,32 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"] - SiteVisitka</title>
-	<link rel="stylesheet" href="~/css/StyleHeader.css" />
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header class="Header">
-        <h1>Привет</h1>
-    </header>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="logo col-md-3">
+					<h1><a class="">Петя может</a></h1>
+				</div>
+				<div class="col-md-2 offset-6 dopInfo offset-md-4"><a class="">Наши работы</a></div>
+				<div class="col-md-2 dopInfo offset-md-1 col-xl-1"><a class="">О нас</a></div>
+			</div>
+		</div>
+	</header>
     <div>
         @RenderBody()
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - SiteVisitka - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<h1>End</h1>
+			</div>
+		</div>
+	</footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
