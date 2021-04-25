@@ -1,0 +1,131 @@
+﻿body {
+    background-image: url("../Images/Fons/Fon6.png");
+    margin: auto;
+}
+
+header, footer {
+    background-color: #D5B08F;
+    margin: 0;
+}
+
+footer {
+    margin-top: 1cm;
+}
+
+.logo {
+    font: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+    text-align: left;
+}
+
+.dopInfo {
+    text-align: center;
+    line-height: 45px;
+    font-size: 25px;
+}
+
+@media (min-width: 576px) {
+    .dopInfo {
+    }
+
+    .img_wrap {
+        width: 180px;
+        height: 120px;
+    }
+}
+
+@media (min-width: 768px) {
+    .dopInfo {
+        max-width: 1140px;
+    }
+
+    .offset-6 {
+        margin-left: 40%;
+    }
+
+    .img_wrap {
+        width: 180px;
+        height: 120px;
+    }
+}
+
+@media (min-width: 992px) {
+    .dopInfo {
+        max-width: 1140px;
+    }
+
+    .img_wrap {
+        width: 240px;
+        height: 160px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .dopInfo {
+        font-size: 25px;
+    }
+
+    .img_wrap {
+        width: 285px;
+        height: 190px;
+    }
+}
+
+.Presenting {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+iframe {
+    height: 100%;
+    border: none;
+}
+
+.img_wrap {
+}
+
+    .img_wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 0 0;
+    }
+
+.galerea div {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.galerea img {
+    padding: 10px;
+}
+
+.aWorks {
+    border: 8px double black;
+    background-color: rgba(84,33,3,0.70);
+    color: #C6C6C6;
+}
+
+.BoxCooments {
+    margin-top: 1cm;
+    border: 5px outset #D19E5F;
+    background-color: #B0342A;
+    padding-bottom: 0.5cm;
+}
+
+.coment {
+    margin: 0.5cm 0.5cm 0cm;
+    background-color: #2E1C24;
+    color: #C6C6C6;
+    border: 3px solid black;
+}
+
+.Name {
+    font-size: 18;
+}
+
+.Adress {
+}
+
+.TextComment {
+    margin: 0.3cm;
+}
