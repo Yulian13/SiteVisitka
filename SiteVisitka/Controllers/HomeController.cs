@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SiteVisitka.Models;
+using SiteVisitka.Models.SQL_models.Works;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,11 +12,13 @@ namespace SiteVisitka.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly WorksContext db;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, WorksContext context)
         {
             _logger = logger;
+            db = context;
         }
 
         public IActionResult Main()
