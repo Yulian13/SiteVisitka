@@ -11,6 +11,6 @@ namespace SiteVisitka.Models.SQL_models.Works
         public string Name { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
-        public List<Image> Images { get; set; }
+        public List<Image> Images { get; set; } = new List<Image>();
     }
 }

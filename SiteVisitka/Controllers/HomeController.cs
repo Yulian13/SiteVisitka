@@ -19,15 +19,15 @@ namespace SiteVisitka.Controllers
         {
             _logger = logger;
             db = context;
-            if (db.Works.Any())
+            if (!db.Works.Any())
             {
                 Work work = new Work() { Name="test", Description = "Description", Address= "Address" };
 
                 List<Image> images = new List<Image>() { 
-                    new Image() { url = $"~/Images/Works/Test/1.jpg", Work = work},
-                    new Image() { url = $"~/Images/Works/Test/2.jpg", Work = work},
-                    new Image() { url = $"~/Images/Works/Test/3.jpg", Work = work},
-                    new Image() { url = $"~/Images/Works/Test/4.jpg", Work = work}
+                    new Image() { url = @"https://sun9-68.userapi.com/impf/H4PYyEU4KKSAdgIArrLgIMO4iulOTMiUG2yH_A/eh6Td8mnviI.jpg?size=1037x584&quality=96&sign=486e9a9394ee484cea852dd373d8cb47&type=album", Work = work},
+                    new Image() { url = @"https://sun9-18.userapi.com/impf/psPFReFlbichEasBeU3OJ89k37b0SAOfLLHc7A/wOLpwr87POw.jpg?size=1037x584&quality=96&sign=32c97eedafacd598072d3d21439d04be&type=album", Work = work},
+                    new Image() { url = @"https://sun9-16.userapi.com/impf/MwcPfoObWEfsstYaEE8Gn9ZcTCMRCAzSL0Wl6Q/2PLzERTD3QU.jpg?size=1037x584&quality=96&sign=420a7fe6d0c140301e4ea73f2348dc3f&type=album", Work = work},
+                    new Image() { url = @"https://sun9-19.userapi.com/impf/gD8_ag0_cBrUV-I5DQU_f51oZBtjUD01OhpZOg/4K4nldnn1U4.jpg?size=1037x584&quality=96&sign=4852f522aa816f7220afa28cf3a590d3&type=album", Work = work}
                 };
 
                 work.Images = images;
@@ -40,7 +40,7 @@ namespace SiteVisitka.Controllers
 
         public IActionResult Main()
         {
-            return View();
+            return View(db);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
