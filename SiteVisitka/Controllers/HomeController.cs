@@ -19,6 +19,23 @@ namespace SiteVisitka.Controllers
         {
             _logger = logger;
             db = context;
+            if (db.Works.Any())
+            {
+                Work work = new Work() { Name="test", Description = "Description", Address= "Address" };
+
+                List<Image> images = new List<Image>() { 
+                    new Image() { url = $"~/Images/Works/Test/1.jpg", Work = work},
+                    new Image() { url = $"~/Images/Works/Test/2.jpg", Work = work},
+                    new Image() { url = $"~/Images/Works/Test/3.jpg", Work = work},
+                    new Image() { url = $"~/Images/Works/Test/4.jpg", Work = work}
+                };
+
+                work.Images = images;
+
+                db.Works.Add(work);
+                db.Images.AddRange(images);
+                db.SaveChanges();
+            }
         }
 
         public IActionResult Main()
