@@ -1,5 +1,5 @@
 ﻿body {
-    background-image: url("../Images/Fons/Fon6.png");
+    background-image: url("https://i.pinimg.com/originals/fd/de/37/fdde3793e3fe78f1eb47bf2b438e023a.png");
     margin: auto;
 }
 
@@ -13,7 +13,7 @@ footer {
 }
 
 .logo {
-    font: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
     text-align: left;
 }
 
@@ -21,6 +21,25 @@ footer {
     text-align: center;
     line-height: 45px;
     font-size: 25px;
+}
+
+.PresentingBlok {
+    flex: 100%;
+}
+
+.PresentingBlok img {
+    width: 100%;
+}
+
+@media (min-width: 150px) {
+    .dopInfo {
+    }
+
+
+    .img_wrap {
+        width: 180px;
+        height: 120px;
+    }
 }
 
 @media (min-width: 576px) {
@@ -34,6 +53,12 @@ footer {
 }
 
 @media (min-width: 768px) {
+    .PresentingBlok {
+        max-width: 100%;
+    }
+
+
+
     .dopInfo {
         max-width: 1140px;
     }
@@ -49,8 +74,13 @@ footer {
 }
 
 @media (min-width: 992px) {
+    .PresentingBlok{
+        max-width: 100%;
+    }
+
     .dopInfo {
         max-width: 1140px;
+        font-size: 20px;
     }
 
     .img_wrap {
@@ -60,6 +90,10 @@ footer {
 }
 
 @media (min-width: 1200px) {
+    .PresentingBlok {
+        max-width: 50%;
+    }
+    
     .dopInfo {
         font-size: 25px;
     }

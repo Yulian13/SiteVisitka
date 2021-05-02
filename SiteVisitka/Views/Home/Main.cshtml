@@ -5,11 +5,11 @@
 
 <div class="container Presenting">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 PresentingBlok">
 			<p>@File.ReadAllText("wwwroot/Text/MainText.txt")</p>
 		</div>
-		<div class="col-md-6">
-			<img src="~/Images/BusinessPhoto.png">
+		<div class="col-md-6 PresentingBlok">
+			<img src="@File.ReadAllText("wwwroot\Images\BusinessLinkToPhoto.txt")">
 		</div>
 	</div>
 </div>

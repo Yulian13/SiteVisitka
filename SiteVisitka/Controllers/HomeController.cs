@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SiteVisitka.Models;
 using SiteVisitka.Models.SQL_models.Works;
@@ -19,6 +20,7 @@ namespace SiteVisitka.Controllers
         {
             _logger = logger;
             db = context;
+            db.Images.Load();
             if (!db.Works.Any())
             {
                 Work work = new Work() { Name="test", Description = "Description", Address= "Address" };
@@ -30,7 +32,7 @@ namespace SiteVisitka.Controllers
                     new Image() { url = @"https://sun9-19.userapi.com/impf/gD8_ag0_cBrUV-I5DQU_f51oZBtjUD01OhpZOg/4K4nldnn1U4.jpg?size=1037x584&quality=96&sign=4852f522aa816f7220afa28cf3a590d3&type=album", Work = work}
                 };
 
-                work.Images = images;
+                work.Images.AddRange(images);
 
                 db.Works.Add(work);
                 db.Images.AddRange(images);
