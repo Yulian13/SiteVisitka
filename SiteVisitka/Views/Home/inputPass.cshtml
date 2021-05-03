@@ -1,0 +1,31 @@
+﻿@{
+	ViewData["Title"] = "Password";
+}
+
+<style>
+	.Centr{
+		display: block;
+		margin:auto;
+		width: 200px;
+	}
+	.oneBlock {
+		margin-top: 20%;
+	}
+	.twoBlock {
+		margin-top: 2%;
+		margin-bottom: 100%;
+	}
+</style>
+
+<div class="container">
+	<div class="text-center">
+		<form asp-action="admin">
+			<div class="row oneBlock" >
+					<input type="password" name="pass" class="Centr"/>
+			</div>
+			<div class="row twoBlock">
+				<input type="submit" value="Submit" class="Centr"/>
+			</div>
+		</form>
+	</div>
+</div>

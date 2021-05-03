@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SiteVisitka.Models;
 using SiteVisitka.Models.SQL_models.Works;
@@ -14,12 +15,15 @@ namespace SiteVisitka.Controllers
     public class HomeController : Controller
     {
         private readonly WorksContext db;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, WorksContext context)
+        public HomeController(ILogger<HomeController> logger, WorksContext context, IConfiguration configuration)
         {
             _logger = logger;
             db = context;
+            _configuration = configuration;
+
             db.Images.Load();
             if (!db.Works.Any())
             {
@@ -43,6 +47,28 @@ namespace SiteVisitka.Controllers
         public IActionResult Main()
         {
             return View(db);
+        }
+
+        [HttpGet]
+        public IActionResult admin()
+        {
+            return View("inputPass");
+        }
+
+        [HttpPost]
+        public object admin(string pass)
+        {
+            var d = _configuration["Pass"];
+            if (_configuration["Pass"].Equals(pass))
+            {
+                return View(db);
+            }
+            return "Invalid password";
+        }
+
+        public IActionResult addWork(Work work)
+        {
+            return;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
