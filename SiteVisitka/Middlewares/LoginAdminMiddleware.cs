@@ -1,24 +1,24 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using SiteVisitka.Serviсes;
 using System.Threading.Tasks;
 
 namespace SiteVisitka.Middlewares
 {
     public class LoginAdminMiddleware
     {
-        private const string _inputStatus = "input";
-        private const string _inputOK = "OK";
-
         private readonly string _controller;
         private readonly string _UrlInputPass;
 
         private readonly RequestDelegate _next;
+        private readonly ManagerLoginAdmin _managerLoginAdmin;
 
-        public LoginAdminMiddleware(RequestDelegate next, IConfiguration configuration)
+        public LoginAdminMiddleware(RequestDelegate next, IConfiguration configuration, ManagerLoginAdmin managerLoginAdmin)
         {
             _controller = configuration["AdminUrls:controller"];
             _UrlInputPass = configuration["AdminUrls:inputPass"];
             _next = next;
+            _managerLoginAdmin = managerLoginAdmin;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -29,7 +29,7 @@ namespace SiteVisitka.Middlewares
                 context.Response.Redirect(_UrlInputPass);
             }
             else if (url.StartsWithSegments(_controller) && !url.Value.Contains(_UrlInputPass)
-                    && !(context.Session.GetString(_inputStatus)?.Equals(_inputOK) ?? false))
+                    && !_managerLoginAdmin.IsStatusOK(context))
             {
                 var t = url.Value.Split('/');
                 string attrebut = (t.Length > 2) ? $"?action={t[2]}" : "";

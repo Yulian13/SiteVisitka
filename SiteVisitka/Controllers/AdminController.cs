@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SiteVisitka.Models.SQL_models.Works;
+using SiteVisitka.Serviсes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +14,13 @@ namespace SiteVisitka.Controllers
 {
     public class AdminController : Controller
     {
-        private const string _inputStatus = "input";
-        private const string _inputOK = "OK";
-
         private readonly WorksContext db;
-        private readonly IConfiguration _configuration;
+        private readonly ManagerLoginAdmin _managerLoginAdmin;
 
-        public AdminController(WorksContext context, IConfiguration configuration)
+        public AdminController(WorksContext context, ManagerLoginAdmin managerLoginAdmin)
         {
             db = context;
-            _configuration = configuration;
+            _managerLoginAdmin = managerLoginAdmin;
 
             db.Images.Load();
             if (!db.Works.Any())
@@ -54,18 +52,22 @@ namespace SiteVisitka.Controllers
         [HttpPost]
         public object InputPass(string pass, string action)
         {
-            if (_configuration["Pass"].Equals(pass))
+            if (_managerLoginAdmin.SetStatusAndCheckPassword(pass, HttpContext))
             {
-                HttpContext.Session.SetString(_inputStatus, _inputOK);
                 return View(action, db);
             }
             else
                 return "Invalid password";
         }
 
-        public ActionResult Main()
+        public IActionResult Main()
         {
             return View(db);
+        }
+
+        public IActionResult AddWork()
+        {
+            return View();
         }
 
     }

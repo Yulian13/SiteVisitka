@@ -1,0 +1,35 @@
+﻿
+@{
+	ViewData["Title"] = "AddWork";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+	footer {
+		margin-top: 100%;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<h1>Add Work</h1>
+	</div>
+	<div class="row">
+		<form name="Test">
+			<p>Введите название<p>
+			<input type="text" name="Name">
+
+			<p>Введите описание</p>
+			<textarea name="Description"></textarea>
+
+			<p>Введите адрес</p>
+			<input type="text" name="Address">
+
+			<p>Введите сылки на изображения через enter</p>
+			<textarea name="urlImages"></textarea>
+			<br />
+			<button type="button" id="submit" onclick="getElement()">Отправить</button>
+		</form>
+	</div>
+</div>
+<script src="~/js/ScriptForApiAddWork.js"></script>

@@ -4,20 +4,21 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
+<style>
+	footer {
+		margin-top: 100%;
+	}
+	a {
+		color: #e69e19;
+	}
+	a:visited {
+		color: #e69e19;
+	}
+</style>
+<div class="container Presenting">
 	<div class="row">
-		<form name="Test">
-			<input type="text" name="Name">
-			<br />
-			<input type="text" name="Description">
-			<br />
-			<input type="text" name="Address">
-			<br />
-			<textarea name="urlImages"></textarea>
-			<br />
-			<button type="button" id="submit" onclick="getElement()">Submit</button>
-		</form>
+		<a href="~/Admin/AddWork" class="button">
+			Добавить работу
+		</a>
 	</div>
 </div>
-
-<script src="~/js/ScriptForAdmin.js"></script>

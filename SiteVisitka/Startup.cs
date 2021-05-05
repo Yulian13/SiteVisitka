@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SiteVisitka.Middlewares;
 using SiteVisitka.Models.SQL_models.Works;
+using SiteVisitka.Serviñes;
 using System;
 
 namespace SiteVisitka
@@ -36,6 +37,8 @@ namespace SiteVisitka
                 option.Cookie.Name = "InputStatus";
                 option.Cookie.IsEssential = true;
             });
+
+            services.AddSingleton<ManagerLoginAdmin>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
