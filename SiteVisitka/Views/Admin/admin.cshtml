@@ -1,0 +1,23 @@
+﻿@model WorksContext
+@{
+	ViewData["Title"] = "admin";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="row">
+		<form name="Test">
+			<input type="text" name="Name">
+			<br />
+			<input type="text" name="Description">
+			<br />
+			<input type="text" name="Address">
+			<br />
+			<textarea name="urlImages"></textarea>
+			<br />
+			<button type="button" id="submit" onclick="getElement()">Submit</button>
+		</form>
+	</div>
+</div>
+
+<script src="~/js/ScriptForAdmin.js"></script>
