@@ -45,22 +45,14 @@ namespace SiteVisitka.Controllers
 
         }
 
-        public ActionResult Index(int arg1, [FromQuery] string action = "admin")
+        [HttpGet]
+        public ActionResult InputPass([FromQuery] string action = "Main")
         {
-            string status = HttpContext.Session.GetString(_inputStatus);
-            if (status != null && status.Equals(_inputOK))
-            {
-                return View("admin", db);
-            }
-            else
-            {
-                ViewData["action"] = action;
-                return View("inputPass");
-            }
+            ViewData["act"] = action;
+            return View("inputPass");
         }
-
         [HttpPost]
-        public object Index(string pass, string action)
+        public object InputPass(string pass, string action)
         {
             if (_configuration["Pass"].Equals(pass))
             {
@@ -70,5 +62,11 @@ namespace SiteVisitka.Controllers
             else
                 return "Invalid password";
         }
+
+        public ActionResult Main()
+        {
+            return View(db);
+        }
+
     }
 }

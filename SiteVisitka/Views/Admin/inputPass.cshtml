@@ -19,9 +19,9 @@
 
 <div class="container">
 	<div class="text-center">
-		<form asp-action="Index">
+		<form method="post" action="~/Admin/InputPass">
 			<div class="row oneBlock" >
-				<input type="hidden" name="action" value="@ViewData["action"]"/>
+				<input type="hidden" name="action" value="@ViewData["act"]"/>
 				<input type="password" name="pass" class="Centr"/>
 			</div>
 			<div class="row twoBlock">
