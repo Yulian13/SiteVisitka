@@ -16,8 +16,9 @@
 	</div>
 	<div class="row">
 		<form name="Test">
-			<p>Введите название<p>
+			<p>Введите название*</p>
 			<input type="text" name="Name">
+			<label id="ErrorName" style="color:red"></label>
 
 			<p>Введите описание</p>
 			<textarea name="Description"></textarea>
@@ -25,10 +26,18 @@
 			<p>Введите адрес</p>
 			<input type="text" name="Address">
 
-			<p>Введите сылки на изображения через enter</p>
+			<p>Введите сылки на изображения через enter*</p>
 			<textarea name="urlImages"></textarea>
+			<label id="ErrorUrls" style="color:red"></label>
+
+			<label>Показывать на гланой странице</label>
+			<input type="checkbox" name="Prestige"/>
+
 			<br />
-			<button type="button" id="submit" onclick="getElement()">Отправить</button>
+			<button type="button" id="submit" onclick="CreatWork()">Отправить</button>
+
+			<br />
+			<p id="statusOK" style="color:green; display:none">Данные успешно отправлены</p>
 		</form>
 	</div>
 </div>

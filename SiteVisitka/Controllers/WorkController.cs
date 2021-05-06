@@ -36,25 +36,23 @@ namespace SiteVisitka.Controllers
         public async Task<ActionResult<Work>> Post(ArgumentClass arguments)
         {
             if (!_managerLoginAdmin.IsStatusOK(HttpContext))
-                ModelState.AddModelError("pass","Неверный пароль");
+                return Forbid();
 
             if (string.IsNullOrWhiteSpace(arguments.urlImages))
                 ModelState.AddModelError("urls", "пустое поле");
+
             if (string.IsNullOrWhiteSpace(arguments.Name))
                 ModelState.AddModelError("name", "пустое поле");
-            if (string.IsNullOrWhiteSpace(arguments.Description))
-                ModelState.AddModelError("description", "пустое поле");
-            if (string.IsNullOrWhiteSpace(arguments.Address))
-                ModelState.AddModelError("address", "пустое поле");
 
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             Work work = new Work()
             {
                 Name = arguments.Name,
                 Description = arguments.Description,
-                Address = arguments.Address
+                Address = arguments.Address,
+                Prestige = arguments.Prestige
             };
 
             List<Image> images = new List<Image>();
@@ -66,8 +64,8 @@ namespace SiteVisitka.Controllers
 
             db.Images.AddRange(images);
             db.Works.Add(work);
-            await db.SaveChangesAsync();
-            return Ok();
+            //await db.SaveChangesAsync();
+            return Ok(work);
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model List<Work>
+@{
+    ViewData["Title"] = "Works";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<div class="row" style="margin-top:30px">
+		<h1 class="logo PresentingLogo">Наши Работы</h1>
+	</div>
+	@foreach (Work work in Model)
+	{
+		<div class="row aWorks">
+			<div class="col col-md-6 galerea">
+				<div class="row">
+					@foreach (Image image in work.Images.Take(2))
+					{
+						<div class="col col-md-6"><img src="@image.url" class="imgWrap"></div>
+					}
+				</div>
+				<div class="row">
+					@foreach (Image image in work.Images.Skip(2).Take(2))
+					{
+						<div class="col col-md-6"><img src="@image.url" class="imgWrap"></div>
+					}
+				</div>
+			</div>
+			<div class="col col-md-6">
+				<h4>@work.Name</h4>
+				<p>@work.Description</p>
+			</div>
+		</div>
+	}
+
+</div>
+

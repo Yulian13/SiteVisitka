@@ -1,26 +1,20 @@
-﻿function getElement() {
-	const form = document.forms["Test"];
-	const name = form.elements["Name"];
-	const description = form.elements["Description"];
-	const address = form.elements["Address"];
-	const text = form.elements["urlImages"];
+﻿const ErrorUrls = document.getElementById("ErrorUrls");
+const ErrorName = document.getElementById("ErrorName");
+const statusOK = document.getElementById("statusOK");
+const form = document.forms["Test"];
+const name = form.elements["Name"];
+const description = form.elements["Description"];
+const address = form.elements["Address"];
+const text = form.elements["urlImages"];
 
-	CreatWork(name, description, address, text);
-
-	name.value = "";
-	description.value = "";
-	address.value = "";
-	text.value = "";
-}
-
-async function CreatWork(name, description, address, tex) {
+async function CreatWork() {
 
 	var path = '/api/Work';
 	var work = {
 		Name: name.value,
 		Description: description.value,
 		Address: address.value,
-		urlImages: tex.value
+		urlImages: text.value
 	};
 	
 	var obj1 = JSON.stringify(work);
@@ -33,4 +27,40 @@ async function CreatWork(name, description, address, tex) {
 			body: obj1
 		}
 	);
+
+	if (respons.ok === true) {
+		statusOK.style.display = "block"
+		reset();
+	}
+	else {
+		statusOK.style.display = "none";
+		const errorData = await respons.json();
+		console.log("errors", errorData);
+
+		if (errorData) {
+			if (errorData["urls"]) {
+				ErrorUrls.textContent = errorData["urls"];
+			}
+			else {
+				ErrorUrls.textContent = "";
+			}
+
+			if (errorData["name"]) {
+				ErrorName.textContent = errorData["name"];
+			}
+			else {
+				ErrorName.textContent = "";
+			}
+		}
+	}
+}
+
+function reset() {
+
+	name.textContent = "";
+	description.value = "";
+	address.value = "";
+	text.value = "";
+	ErrorUrls.textContent = "";
+	ErrorName.textContent = "";
 }

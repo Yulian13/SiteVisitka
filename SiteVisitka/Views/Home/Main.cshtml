@@ -14,21 +14,21 @@
 	</div>
 </div>
 <div class="container">
-	@foreach (Work work in Model.Works.Take(3))
+	@foreach (Work work in Model.Works.Where(x => x.Prestige))
 	{
 
-<div class="row aWorks">
+		<div class="row aWorks">
 			<div class="col col-md-6 galerea">
 				<div class="row">
 					@foreach (Image image in work.Images.Take(2))
 					{
-						<div class="col col-md-6"><img src="@image.url" class="img_wrap"></div>
+						<div class="col col-md-6"><img src="@image.url" class="imgWrap"></div>
 					}
-				</div>
-				<div class="row">
+				@*</div>
+				<div class="row">*@
 					@foreach (Image image in work.Images.Skip(2).Take(2))
 					{
-						<div class="col col-md-6"><img src="@image.url" class="img_wrap"></div>
+						<div class="col col-md-6"><img src="@image.url" class="imgWrap"></div>
 					}
 				</div>
 			</div>

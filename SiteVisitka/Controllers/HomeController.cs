@@ -25,7 +25,7 @@ namespace SiteVisitka.Controllers
             db.Images.Load();
             if (!db.Works.Any())
             {
-                Work work = new Work() { Name="test", Description = "Description", Address= "Address" };
+                Work work = new Work() { Name="test", Description = "Description", Address= "Address", Prestige = true };
 
                 List<Image> images = new List<Image>() { 
                     new Image() { url = @"https://sun9-68.userapi.com/impf/H4PYyEU4KKSAdgIArrLgIMO4iulOTMiUG2yH_A/eh6Td8mnviI.jpg?size=1037x584&quality=96&sign=486e9a9394ee484cea852dd373d8cb47&type=album", Work = work},
@@ -48,9 +48,9 @@ namespace SiteVisitka.Controllers
         }
 
         [HttpGet]
-        public IActionResult addWork(Work work)
+        public IActionResult Works()
         {
-            return null;
+            return View(db.Works.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
