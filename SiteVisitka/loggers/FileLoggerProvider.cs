@@ -31,7 +31,7 @@ namespace SiteVisitka.loggers
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

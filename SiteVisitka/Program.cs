@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
 
 namespace SiteVisitka
 {
@@ -7,7 +9,20 @@ namespace SiteVisitka
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception ex)
+            {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "logs\\FailCreateHostBuilder.txt");
+                string message = DateTime.Now.ToString()
+                    + Environment.NewLine
+                    + ex.Message
+                    + Environment.NewLine;
+
+                File.AppendAllText(path, message);
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

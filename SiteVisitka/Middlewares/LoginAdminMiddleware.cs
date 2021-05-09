@@ -25,8 +25,6 @@ namespace SiteVisitka.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            //var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-
             PathString url = context.Request.Path;
             if (url.Value.Equals(_controller))
             {

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SiteVisitka.loggers;
 using SiteVisitka.Middlewares;
 using SiteVisitka.Models.SQL_models.Works;
@@ -38,15 +39,11 @@ namespace SiteVisitka
                 option.Cookie.IsEssential = true;
             });
 
-            services.AddSingleton<ManagerLoginAdmin>();
+            services.AddScoped<ManagerLoginAdmin>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddLoggerException(configuration);
-            var logger = loggerFactory.CreateLogger("FileLogger");
-            logger.LogInformation("testing");
-
             if (false)
             {
                 app.UseDeveloperExceptionPage();
@@ -55,7 +52,11 @@ namespace SiteVisitka
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
+
+                var logger = loggerFactory.AddLoggerException(configuration).CreateLogger("FileLogger");
+                app.UseMiddleware<CheckExceptionMiddleware>(Options.Create(logger));
             }
+
             app.UseSession();
 
             app.UseHttpsRedirection();
