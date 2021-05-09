@@ -6,13 +6,48 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Images\Fons\Fon.png" />
+    <Content Remove="wwwroot\Images\Fons\Fon1.png" />
+    <Content Remove="wwwroot\Images\Fons\Fon2.png" />
+    <Content Remove="wwwroot\Images\Fons\Fon3.png" />
+    <Content Remove="wwwroot\Images\Fons\Fon4.png" />
+    <Content Remove="wwwroot\Images\Fons\Fon5.png" />
+    <Content Remove="wwwroot\Images\Fons\Fon6.png" />
+    <Content Remove="wwwroot\Images\PhotoShop\BusinessPhoto.psd" />
+    <Content Remove="wwwroot\Images\PhotoShop\Без имени-1.psd" />
+    <Content Remove="wwwroot\Images\Works\Test\1.jpg" />
+    <Content Remove="wwwroot\Images\Works\Test\2.jpg" />
+    <Content Remove="wwwroot\Images\Works\Test\3.jpg" />
+    <Content Remove="wwwroot\Images\Works\Test\4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Logs\ChangeDbLogs.txt" />
+    <Content Include="Logs\ExceptionLogs.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataBase\" />
+    <None Include="wwwroot\Images\Fons\Fon.png" />
+    <None Include="wwwroot\Images\Fons\Fon1.png" />
+    <None Include="wwwroot\Images\Fons\Fon2.png" />
+    <None Include="wwwroot\Images\Fons\Fon3.png" />
+    <None Include="wwwroot\Images\Fons\Fon4.png" />
+    <None Include="wwwroot\Images\Fons\Fon5.png" />
+    <None Include="wwwroot\Images\Fons\Fon6.png" />
+    <None Include="wwwroot\Images\PhotoShop\BusinessPhoto.psd" />
+    <None Include="wwwroot\Images\PhotoShop\Без имени-1.psd" />
+    <None Include="wwwroot\Images\Works\Test\1.jpg" />
+    <None Include="wwwroot\Images\Works\Test\2.jpg" />
+    <None Include="wwwroot\Images\Works\Test\3.jpg" />
+    <None Include="wwwroot\Images\Works\Test\4.jpg" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

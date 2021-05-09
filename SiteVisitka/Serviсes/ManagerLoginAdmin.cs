@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SiteVisitka.Serviсes
 {
@@ -20,7 +16,7 @@ namespace SiteVisitka.Serviсes
 
         public bool IsStatusOK(HttpContext context) => context.Session.GetString(_inputStatus)?.Equals(_inputOK) ?? false;
 
-        public void SetStatus(string pass, HttpContext context) 
+        public void SetStatus(string pass, HttpContext context)
         {
             if (_password.Equals(pass))
                 context.Session.SetString(_inputStatus, _inputOK);

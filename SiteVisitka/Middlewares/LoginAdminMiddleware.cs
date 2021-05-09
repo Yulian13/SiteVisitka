@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using SiteVisitka.Serviсes;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SiteVisitka.Middlewares
@@ -23,6 +25,8 @@ namespace SiteVisitka.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
+            //var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+
             PathString url = context.Request.Path;
             if (url.Value.Equals(_controller))
             {
@@ -37,7 +41,7 @@ namespace SiteVisitka.Middlewares
                 context.Response.Redirect(newUrl);
             }
             else
-             await _next.Invoke(context);
+                await _next.Invoke(context);
         }
     }
 }

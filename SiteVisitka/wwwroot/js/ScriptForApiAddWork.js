@@ -6,6 +6,7 @@ const name = form.elements["Name"];
 const description = form.elements["Description"];
 const address = form.elements["Address"];
 const text = form.elements["urlImages"];
+const prestige = form.elements["Prestige"];
 
 async function CreatWork() {
 
@@ -14,7 +15,8 @@ async function CreatWork() {
 		Name: name.value,
 		Description: description.value,
 		Address: address.value,
-		urlImages: text.value
+		urlImages: text.value,
+		Prestige: Boolean(prestige.value)
 	};
 	
 	var obj1 = JSON.stringify(work);
@@ -56,7 +58,7 @@ async function CreatWork() {
 }
 
 function reset() {
-
+	prestige.value = false;
 	name.textContent = "";
 	description.value = "";
 	address.value = "";

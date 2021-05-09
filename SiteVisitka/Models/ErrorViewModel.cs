@@ -1,5 +1,3 @@
-using System;
-
 namespace SiteVisitka.Models
 {
     public class ErrorViewModel

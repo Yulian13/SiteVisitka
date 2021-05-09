@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SiteVisitka.Models.SQL_models.Works
+﻿namespace SiteVisitka.Models.SQL_models.Works
 {
     public class Image
     {

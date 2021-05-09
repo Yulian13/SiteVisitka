@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using SiteVisitka.loggers;
 using SiteVisitka.Middlewares;
 using SiteVisitka.Models.SQL_models.Works;
 using SiteVisitka.Serviñes;
-using System;
 
 namespace SiteVisitka
 {
@@ -41,9 +41,13 @@ namespace SiteVisitka
             services.AddSingleton<ManagerLoginAdmin>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
+            loggerFactory.AddLoggerException(configuration);
+            var logger = loggerFactory.CreateLogger("FileLogger");
+            logger.LogInformation("testing");
+
+            if (false)
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -57,12 +61,7 @@ namespace SiteVisitka
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            //app.UseAuthorization();
-
             app.UseMiddleware<LoginAdminMiddleware>();
-
-            //var options = new RewriteOptions().AddRedirect("Admin[/]", "Admin/Index");
-            //app.UseRewriter(options);
 
             app.UseRouting();
 
