@@ -28,7 +28,7 @@ namespace SiteVisitka.loggers
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (formatter != null)
+            if (formatter != null & MylogEventId.MyEventIdChangeDB == eventId)
             {
                 string message = DateTime.Now.ToString()
                     + Environment.NewLine

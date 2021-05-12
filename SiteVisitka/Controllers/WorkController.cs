@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SiteVisitka.Models;
 using SiteVisitka.Models.SQL_models.Works;
 using SiteVisitka.Serviсes;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,11 +15,13 @@ namespace SiteVisitka.Controllers
     {
         private WorksContext db;
         private readonly ManagerLoginAdmin _managerLoginAdmin;
+        private readonly MyFileLogger _logger;
 
-        public WorkController(WorksContext context, ManagerLoginAdmin managerLoginAdmin)
+        public WorkController(WorksContext context, ManagerLoginAdmin managerLoginAdmin, MyFileLogger logger)
         {
             db = context;
             _managerLoginAdmin = managerLoginAdmin;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -29,7 +32,7 @@ namespace SiteVisitka.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Work>> Post(ArgumentClass arguments)
+        public ActionResult<Work> Post(ArgumentClass arguments)
         {
             if (!_managerLoginAdmin.IsStatusOK(HttpContext))
                 return Forbid();
@@ -60,8 +63,20 @@ namespace SiteVisitka.Controllers
 
             db.Images.AddRange(images);
             db.Works.Add(work);
-            //await db.SaveChangesAsync();
-            return Ok(work);
+
+            try
+            {
+                db.SaveChanges();
+                _logger.logAddWorkToDB(work);
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogException(ex);
+
+                return BadRequest(ex);
+            }
         }
     }
 }

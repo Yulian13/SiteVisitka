@@ -29,7 +29,7 @@ namespace SiteVisitka.loggers
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (formatter != null && exception != null && formatter(state, exception).Equals("myMessagelog"))
+            if (formatter != null & exception != null & MylogEventId.MyEventIdException == eventId)
             {
                 string message = DateTime.Now.ToString()
                     + Environment.NewLine

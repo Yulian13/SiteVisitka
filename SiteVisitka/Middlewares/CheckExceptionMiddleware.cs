@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SiteVisitka.Serviсes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,12 @@ namespace SiteVisitka.Middlewares
 {
     public class CheckExceptionMiddleware
     {
-        private readonly ILogger _logger;
+        private readonly MyFileLogger _logger;
         private readonly RequestDelegate _next;
 
-        public CheckExceptionMiddleware(RequestDelegate next, IOptions<ILogger> options)
+        public CheckExceptionMiddleware(RequestDelegate next, MyFileLogger logger)
         {
-            _logger = options.Value;
+            _logger = logger;
             _next = next;
         }
 
@@ -25,7 +26,7 @@ namespace SiteVisitka.Middlewares
             var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
             if(exceptionHandlerPathFeature != null)
             {
-                _logger.LogError(exceptionHandlerPathFeature.Error, "myMessagelog");
+                _logger.LogException(exceptionHandlerPathFeature.Error);
             }
 
             await _next.Invoke(context);

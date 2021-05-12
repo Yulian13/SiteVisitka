@@ -1,33 +1,17 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.Extensions.Logging;
 
 namespace SiteVisitka.loggers
 {
     public class FileLoggerProvider : ILoggerProvider
     {
-        private const string _jsonConfigNamePathLogChangeDatabase = "PathsOfLogs:ChangeDatabase";
-        private readonly IConfiguration _configuration;
-        private readonly LogsClass _logsClass;
+        private readonly ILogger _logger;
 
-        public FileLoggerProvider(IConfiguration configuration, LogsClass logsClass)
+        public FileLoggerProvider(ILogger logger)
         {
-            _configuration = configuration;
-            _logsClass = logsClass;
+            _logger = logger;
         }
 
-        public ILogger CreateLogger(string categoryName)
-        {
-            switch (_logsClass)
-            {
-                case LogsClass.Exeption:
-                    return new FileExeptionLogger(_configuration);
-                case LogsClass.ChangeDatabase:
-                    return null;
-            }
-
-            return null;
-        }
+        public ILogger CreateLogger(string categoryName) => _logger;
 
         public void Dispose()
         {

@@ -3,19 +3,25 @@ using Microsoft.Extensions.Logging;
 
 namespace SiteVisitka.loggers
 {
-    public static class FileLoggerExtensions
+    public static class ILoggerFactoryExtensions
     {
         public static ILoggerFactory AddLoggerException(this ILoggerFactory factory,
                                         IConfiguration configuration)
         {
-            factory.AddProvider(new FileLoggerProvider(configuration, LogsClass.Exeption));
+            factory.AddProvider(new FileLoggerProvider
+                (
+                    new FileExeptionLogger(configuration)
+                ));
             return factory;
         }
 
         public static ILoggerFactory AddLoggerChangeDatabase(this ILoggerFactory factory,
                                        IConfiguration configuration)
         {
-            factory.AddProvider(new FileLoggerProvider(configuration, LogsClass.ChangeDatabase));
+            factory.AddProvider(new FileLoggerProvider
+                (
+                    new FileChangeDatabaseLogger(configuration)
+                ));
             return factory;
         }
     }

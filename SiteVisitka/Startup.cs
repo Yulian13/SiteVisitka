@@ -34,15 +34,16 @@ namespace SiteVisitka
                 );
 
             services.AddSession(option =>
-            {
-                option.Cookie.Name = "InputStatus";
-                option.Cookie.IsEssential = true;
-            });
+                {
+                    option.Cookie.Name = "InputStatus";
+                    option.Cookie.IsEssential = true;
+                });
 
-            services.AddScoped<ManagerLoginAdmin>();
+            services.AddSingleton<ManagerLoginAdmin>();
+            services.AddSingleton<MyFileLogger>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration)
         {
             if (false)
             {
@@ -53,8 +54,7 @@ namespace SiteVisitka
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
 
-                var logger = loggerFactory.AddLoggerException(configuration).CreateLogger("FileLogger");
-                app.UseMiddleware<CheckExceptionMiddleware>(Options.Create(logger));
+                app.UseMiddleware<CheckExceptionMiddleware>();
             }
 
             app.UseSession();
