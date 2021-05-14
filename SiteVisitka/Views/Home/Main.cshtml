@@ -9,7 +9,13 @@
 			<p>@File.ReadAllText("wwwroot/Text/MainText.txt")</p>
 		</div>
 		<div class="col-md-6 PresentingBlok">
-			<img src="@File.ReadAllText("wwwroot/Images/BusinessLinkToPhoto.txt")">
+			@{string MainPath = "wwwroot/Images/BusinessLinkToPhoto.txt";
+				if (!File.Exists(MainPath))
+				{
+					MainPath = null;
+				}
+			}
+			<img src="@File.ReadAllText(MainPath)">
 		</div>
 	</div>
 </div>
@@ -24,8 +30,8 @@
 					{
 						<div class="col col-md-6"><img src="@image.url" class="imgWrap"></div>
 					}
-				@*</div>
-				<div class="row">*@
+				</div>
+				<div class="row">
 					@foreach (Image image in work.Images.Skip(2).Take(2))
 					{
 						<div class="col col-md-6"><img src="@image.url" class="imgWrap"></div>

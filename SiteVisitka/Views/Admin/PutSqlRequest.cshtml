@@ -1,0 +1,35 @@
+﻿
+@{
+	ViewData["Title"] = "PutSqlRequestk";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+	footer {
+		margin-top: 100%;
+	}
+
+	textarea {
+		height: 400%;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<h1>PutSqlRequestk</h1>
+	</div>
+	<div class="row">
+		<form name="PostRequest">
+			<textarea name="request"></textarea>
+			<label id="ErrorUrls" style="color:red"></label>
+
+			<br />
+			<button type="button" id="submit" onclick="OnPostRequest()">Отправить</button>
+
+			<br />
+			<p id="statusOK" style="color:green; display:none">Запрос успешно отправлен</p>
+			<p id="statusError" style="color:red; display:none">Ошибка</p>
+		</form>
+	</div>
+</div>
+<script src="~/js/ScriptForApiPostSqlrequest.js"></script>

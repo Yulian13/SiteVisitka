@@ -24,6 +24,8 @@ namespace SiteVisitka
 
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             string connection = Configuration.GetConnectionString("WorkConnection");
             services.AddDbContext<WorksContext>(option =>
                 option.UseSqlServer(connection));
@@ -45,7 +47,7 @@ namespace SiteVisitka
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration)
         {
-            if (false)
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

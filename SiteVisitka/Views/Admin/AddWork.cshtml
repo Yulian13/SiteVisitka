@@ -15,7 +15,7 @@
 		<h1>Add Work</h1>
 	</div>
 	<div class="row">
-		<form name="Test">
+		<form name="PostWork">
 			<p>Введите название*</p>
 			<input type="text" name="Name">
 			<label id="ErrorName" style="color:red"></label>
@@ -31,13 +31,14 @@
 			<label id="ErrorUrls" style="color:red"></label>
 
 			<label>Показывать на гланой странице</label>
-			<input type="checkbox" name="Prestige"/>
+			<input type="checkbox" name="Prestige" />
 
 			<br />
 			<button type="button" id="submit" onclick="CreatWork()">Отправить</button>
 
 			<br />
 			<p id="statusOK" style="color:green; display:none">Данные успешно отправлены</p>
+			<p id="statusError" style="color:red; display:none">Ошибка</p>
 		</form>
 	</div>
 </div>

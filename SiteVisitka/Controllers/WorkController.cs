@@ -27,12 +27,20 @@ namespace SiteVisitka.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Work>>> Get()
         {
-            return await db.Works.Include(x => x.Images).ToListAsync();
+            try
+            {
+                return await db.Works.Include(x => x.Images).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogException(ex);
+                return null;
+            }
         }
 
 
         [HttpPost]
-        public ActionResult<Work> Post(ArgumentClass arguments)
+        public ActionResult Post(ArgumentClass arguments)
         {
             if (!_managerLoginAdmin.IsStatusOK(HttpContext))
                 return Forbid();
@@ -54,7 +62,7 @@ namespace SiteVisitka.Controllers
                 Prestige = arguments.Prestige
             };
 
-            List<Image> images = new List<Image>();
+            List<Image> images = new();
             foreach (string url in arguments.urlImages.Split('\n'))
             {
                 images.Add(new Image() { url = url });
@@ -76,6 +84,23 @@ namespace SiteVisitka.Controllers
                 _logger.LogException(ex);
 
                 return BadRequest(ex);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult Put(ArgumentClass arguments)
+        {
+            string request = arguments.SqlRequest;
+            try
+            {
+                db.Database.ExecuteSqlRaw(request);
+                _logger.logPostSqlRequest(request);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogException(ex);
+                return BadRequest();
             }
         }
     }

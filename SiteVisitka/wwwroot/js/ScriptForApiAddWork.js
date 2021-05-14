@@ -1,7 +1,8 @@
 ﻿const ErrorUrls = document.getElementById("ErrorUrls");
 const ErrorName = document.getElementById("ErrorName");
+const statusError = document.getElementById("statusError");
 const statusOK = document.getElementById("statusOK");
-const form = document.forms["Test"];
+const form = document.forms["PostWork"];
 const name = form.elements["Name"];
 const description = form.elements["Description"];
 const address = form.elements["Address"];
@@ -36,6 +37,7 @@ async function CreatWork() {
 	}
 	else {
 		statusOK.style.display = "none";
+		statusError.style.display = "block";
 		const errorData = await respons.json();
 		console.log("errors", errorData);
 
@@ -58,6 +60,7 @@ async function CreatWork() {
 }
 
 function reset() {
+	statusError.style.display = "none";
 	prestige.value = false;
 	name.textContent = "";
 	description.value = "";

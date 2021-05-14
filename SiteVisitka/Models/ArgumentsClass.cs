@@ -7,6 +7,8 @@
         public string Address { get; set; }
         public bool Prestige { get; set; }
         public string urlImages { get; set; }
+
+        public string SqlRequest { get; set; }
     }
 
 }

@@ -29,5 +29,13 @@ namespace SiteVisitka.Serviсes
             string message = $"A work with the id {work.Id} has been added.";
             _logger.LogInformation(MylogEventId.MyEventIdChangeDB, message);
         }
+
+        public void logPostSqlRequest(string request)
+        {
+            string message = "Request was sent"
+                + Environment.NewLine
+                + request;
+            _logger.LogInformation(MylogEventId.MyEventIdChangeDB, message);
+        }
     }
 }

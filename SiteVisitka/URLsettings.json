@@ -1,0 +1,11 @@
+{
+  "AdminUrls": {
+    "controller": "/Admin",
+    "inputPass": "/Admin/InputPass"
+  },
+
+  "PathsOfLogs": {
+    "Exceptions": "Logs\\ExceptionLogs.txt",
+    "ChangeDatabase": "Logs\\ChangeDbLogs.txt"
+  }
+}
