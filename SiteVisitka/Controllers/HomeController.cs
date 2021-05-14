@@ -13,11 +13,9 @@ namespace SiteVisitka.Controllers
     public class HomeController : Controller
     {
         private readonly WorksContext db;
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, WorksContext context, IConfiguration configuration)
+        public HomeController(WorksContext context, IConfiguration configuration)
         {
-            _logger = logger;
             db = context;
 
             db.Images.Load();

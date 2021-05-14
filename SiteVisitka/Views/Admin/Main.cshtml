@@ -8,12 +8,14 @@
 	footer {
 		margin-top: 100%;
 	}
+
 	a {
 		color: #e69e19;
 	}
-	a:visited {
-		color: #e69e19;
-	}
+
+		a:visited {
+			color: #e69e19;
+		}
 </style>
 <div class="container Presenting">
 	<div class="row">
@@ -25,3 +27,23 @@
 		</a>
 	</div>
 </div>
+
+<div class="container BoxCooments">
+	@foreach (Comment comment in Model.Comments.GroupBy(x => x.Approved))
+	{
+		<div class="row coment">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 Name">@comment.Name</div>
+					<div class="col-md-6 Adress">@comment.Address</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 TextComment">
+						<p>@comment.Text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+

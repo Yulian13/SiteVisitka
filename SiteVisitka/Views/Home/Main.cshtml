@@ -9,13 +9,13 @@
 			<p>@File.ReadAllText("wwwroot/Text/MainText.txt")</p>
 		</div>
 		<div class="col-md-6 PresentingBlok">
-			@{string MainPath = "wwwroot/Images/BusinessLinkToPhoto.txt";
+			@{	string MainPath = "wwwroot/Images/BusinessLinkToPhoto.txt";
+				string UrlToImage = null;
+
 				if (!File.Exists(MainPath))
-				{
-					MainPath = null;
-				}
+					UrlToImage = File.ReadAllText(MainPath);
 			}
-			<img src="@File.ReadAllText(MainPath)">
+			<img src="@UrlToImage">
 		</div>
 	</div>
 </div>
@@ -47,15 +47,20 @@
 </div>
 
 <div class="container BoxCooments">
-	<div class="row coment">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 Name">Name</div>
-				<div class="col-md-6 Adress">Adress</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 TextComment">Text</div>
+	@foreach (Comment comment in Model.Comments.Where(x => x.Approved))
+	{
+		<div class="row coment">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 Name">@comment.Name</div>
+					<div class="col-md-6 Adress">@comment.Address</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 TextComment">
+						<p>@comment.Text</p>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	}
 </div>
