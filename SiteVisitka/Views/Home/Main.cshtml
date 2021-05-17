@@ -12,7 +12,7 @@
 			@{	string MainPath = "wwwroot/Images/BusinessLinkToPhoto.txt";
 				string UrlToImage = null;
 
-				if (!File.Exists(MainPath))
+				if (File.Exists(MainPath))
 					UrlToImage = File.ReadAllText(MainPath);
 			}
 			<img src="@UrlToImage">
@@ -47,20 +47,18 @@
 </div>
 
 <div class="container BoxCooments">
+	@Html.CreateCommentBox(
+		new MyCreatorTagInput(type:"text", cssClass: "commentField", name: "Name", placeholder:"Ваше имя"),
+		new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Address", placeholder: "Приблизительный адресс"),
+		new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context:"", placeholder: "содержимое коментария"),
+		new MyCreatorTagButton(type:"button", context:"Отправить", onClick:"", id:"submitComment")
+	)
 	@foreach (Comment comment in Model.Comments.Where(x => x.Approved))
 	{
-		<div class="row coment">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 Name">@comment.Name</div>
-					<div class="col-md-6 Adress">@comment.Address</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 TextComment">
-						<p>@comment.Text</p>
-					</div>
-				</div>
-			</div>
-		</div>
+		@Html.CreateCommentBox(
+			new MyCreatorTagP(comment.Name),
+			new MyCreatorTagP(comment.Address),
+			new MyCreatorTagP(comment.Text)
+		)
 	}
 </div>
