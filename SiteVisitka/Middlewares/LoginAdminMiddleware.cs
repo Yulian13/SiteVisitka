@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using SiteVisitka.Serviсes;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace SiteVisitka.Middlewares

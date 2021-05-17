@@ -31,7 +31,7 @@ namespace SiteVisitka.Controllers
             {
                 return await db.Works.Include(x => x.Images).ToListAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogException(ex);
                 return null;
@@ -79,7 +79,7 @@ namespace SiteVisitka.Controllers
 
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogException(ex);
 
@@ -97,7 +97,7 @@ namespace SiteVisitka.Controllers
                 _logger.logPostSqlRequest(request);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogException(ex);
                 return BadRequest();

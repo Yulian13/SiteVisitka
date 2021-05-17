@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using SiteVisitka.Models.SQL_models.Works;
 using SiteVisitka.Serviсes;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SiteVisitka.Controllers
 {

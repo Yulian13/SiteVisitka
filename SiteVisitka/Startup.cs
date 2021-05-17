@@ -4,9 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using SiteVisitka.loggers;
 using SiteVisitka.Middlewares;
 using SiteVisitka.Models.SQL_models.Works;
 using SiteVisitka.Serviñes;
@@ -24,7 +21,7 @@ namespace SiteVisitka
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
 
             string connection = Configuration.GetConnectionString("WorkConnection");
             services.AddDbContext<WorksContext>(option =>
@@ -45,7 +42,7 @@ namespace SiteVisitka
             services.AddSingleton<MyFileLogger>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration)
         {
             if (env.IsDevelopment())
             {

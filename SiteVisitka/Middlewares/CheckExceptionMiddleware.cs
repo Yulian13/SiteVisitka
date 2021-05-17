@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using SiteVisitka.Serviсes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SiteVisitka.Middlewares
@@ -24,7 +19,7 @@ namespace SiteVisitka.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-            if(exceptionHandlerPathFeature != null)
+            if (exceptionHandlerPathFeature != null)
             {
                 _logger.LogException(exceptionHandlerPathFeature.Error);
             }

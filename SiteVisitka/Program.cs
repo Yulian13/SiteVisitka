@@ -31,7 +31,8 @@ namespace SiteVisitka
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureAppConfiguration(configure => {
+                    webBuilder.ConfigureAppConfiguration(configure =>
+                    {
                         configure.AddJsonFile("URLsettings.json");
                     });
                 });

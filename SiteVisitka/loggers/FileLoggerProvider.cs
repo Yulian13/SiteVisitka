@@ -15,7 +15,7 @@ namespace SiteVisitka.loggers
 
         public void Dispose()
         {
-            
+
         }
     }
 }

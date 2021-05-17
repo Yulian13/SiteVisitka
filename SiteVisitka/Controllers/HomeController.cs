@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using SiteVisitka.Models;
 using SiteVisitka.Models.SQL_models.Works;
 using System.Collections.Generic;

@@ -3,9 +3,6 @@ using Microsoft.Extensions.Logging;
 using SiteVisitka.loggers;
 using SiteVisitka.Models.SQL_models.Works;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SiteVisitka.Serviсes
 {
