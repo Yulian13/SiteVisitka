@@ -32,9 +32,9 @@
 	@foreach (Comment comment in Model.Comments.GroupBy(x => x.Approved))
 	{
 		@Html.CreateCommentBox(
-			new MyCreatorTagP(comment.Name),
-			new MyCreatorTagP(comment.Address),
-			new MyCreatorTagP(comment.Text)
+			new MyCreatorTagP(context: comment.Name),
+			new MyCreatorTagP(context: comment.Address),
+			new MyCreatorTagP(context: comment.Text)
 		)
 	}
 </div>
