@@ -156,6 +156,16 @@ iframe {
     margin: 0.3cm 0cm;
 }
 
+.OkDiv{
+    color: green;
+    display: none;
+}
+
+.ErrorDiv{
+    color: red;
+    display: none;
+}
+
 .button {
     font: bold 16pt sans;
     background: #bf4276;

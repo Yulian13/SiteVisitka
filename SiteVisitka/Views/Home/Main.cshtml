@@ -50,15 +50,18 @@
 	@Html.CreateCommentBox(
 		new MyCreatorTagInput(type:"text", cssClass: "commentField", name: "Name", placeholder:"Ваше имя"),
 		new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Address", placeholder: "Приблизительный адресс"),
-		new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context:"", placeholder: "содержимое коментария"),
+		new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context:"", placeholder: "содержимое коментария", style: "height: 110px;"),
+		new MyCreatorTagDiv(cssClass: "ErrorDiv", id:"ErrorName", context: "пустое поле имени"),
+		new MyCreatorTagDiv(cssClass: "ErrorDiv", id: "ErrorText", context: "пустое поле комментария"),
+		new MyCreatorTagDiv(cssClass: "OkDiv", id: "OkStatus", context: "комментарий отправлен"),
 		new MyCreatorTagButton(type:"button", context:"Отправить", onClick:"", id:"submitComment")
 	)
 	@foreach (Comment comment in Model.Comments.Where(x => x.Approved))
 	{
 		@Html.CreateCommentBox(
-			new MyCreatorTagP(comment.Name),
-			new MyCreatorTagP(comment.Address),
-			new MyCreatorTagP(comment.Text)
+			new MyCreatorTagP(context: comment.Name),
+			new MyCreatorTagP(context: comment.Address),
+			new MyCreatorTagP(context: comment.Text)
 		)
 	}
 </div>

@@ -34,7 +34,7 @@ namespace SiteVisitka.Controllers
             catch (Exception ex)
             {
                 _logger.LogException(ex);
-                return null;
+                return BadRequest(ex);
             }
         }
 
@@ -75,7 +75,7 @@ namespace SiteVisitka.Controllers
             try
             {
                 db.SaveChanges();
-                _logger.logAddWorkToDB(work);
+                _logger.LogAddWorkToDB(work);
 
                 return Ok();
             }
@@ -94,7 +94,7 @@ namespace SiteVisitka.Controllers
             try
             {
                 db.Database.ExecuteSqlRaw(request);
-                _logger.logPostSqlRequest(request);
+                _logger.LogPostSqlRequest(request);
                 return Ok();
             }
             catch (Exception ex)

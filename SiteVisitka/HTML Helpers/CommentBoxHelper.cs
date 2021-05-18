@@ -26,14 +26,15 @@ namespace SiteVisitka.HTML_Helpers
 		</div>
         */
 
-        public static HtmlString CreateCommentBox(this IHtmlHelper html, IMyTagCreator tagName, IMyTagCreator tagAddress, IMyTagCreator tagText, IMyTagCreator tagButton = null)
+        public static HtmlString CreateCommentBox(this IHtmlHelper html, IMyTagCreator tagName, IMyTagCreator tagAddress, IMyTagCreator tagText, params IMyTagCreator[] tagOthers)
         {
             var writer = new System.IO.StringWriter();
 
             TagBuilder divName = CreatTagDiv("col-md-6 Name", tagName);
             TagBuilder divAddress = CreatTagDiv("col-md-6 Adress", tagAddress);
             TagBuilder divText = CreatTagDiv("col-md-12 TextComment", tagText);
-            divText.InnerHtml.AppendHtml(tagButton?.CreateTag());
+            foreach(IMyTagCreator myTag in tagOthers)
+                divText.InnerHtml.AppendHtml(myTag.CreateTag());
 
             TagBuilder divRowField = CreatTagDiv("row RowCommentField", divName, divAddress);
             TagBuilder divRowText = CreatTagDiv("row", divText);
@@ -74,14 +75,35 @@ namespace SiteVisitka.HTML_Helpers
         TagBuilder CreateTag();
     }
 
-    public class MyCreatorTagP : IMyTagCreator
+    abstract public class TagFields
     {
-        private readonly string _context;
+        protected readonly string _name;
+        protected readonly string _placeholder;
+        protected readonly string _cssClass;
+        protected readonly string _type;
+        protected readonly string _context;
+        protected readonly string _id;
+        protected readonly string _onClick;
+        protected readonly string _style;
 
-        public MyCreatorTagP(string context)
+        public TagFields(string name = "", string placeholder = "", string cssClass = "", string type = ""
+            , string context = "", string id = "", string onClick = "", string style ="")
         {
+            _name = name;
+            _placeholder = placeholder;
+            _cssClass = cssClass;
+            _type = type;
             _context = context;
+            _id = id;
+            _onClick = onClick;
+            _style = style;
         }
+    }
+
+    public class MyCreatorTagP : TagFields, IMyTagCreator
+    {
+        public MyCreatorTagP(string cssClass = "", string type = "", string context = "", string id = "", string onClick = "", string style = "")
+            : base(null, null, cssClass, type, context, id, onClick, style){}
 
         public TagBuilder CreateTag()
         {
@@ -91,21 +113,10 @@ namespace SiteVisitka.HTML_Helpers
         }
     }
 
-    public class MyCreatorTagInput : IMyTagCreator
+    public class MyCreatorTagInput : TagFields, IMyTagCreator
     {
-        private readonly string _name;
-        private readonly string _placeholder;
-        private readonly string _cssClass;
-        private readonly string _type;
-
-        public MyCreatorTagInput( string type, string cssClass, string name, string placeholder = "")
-        {
-            _name = name;
-            _placeholder = placeholder;
-            _cssClass = cssClass;
-            _type = type;
-        }
-
+        public MyCreatorTagInput(string name = "", string placeholder = "", string cssClass = "", string type = "",string id = "", string onClick = "", string style = "")
+            : base(name, placeholder, cssClass, type, null, id, onClick, style) { }
 
         public TagBuilder CreateTag()
         {
@@ -118,22 +129,10 @@ namespace SiteVisitka.HTML_Helpers
         }
     }
 
-    public class MyCreatorTagTextarea : IMyTagCreator
+    public class MyCreatorTagTextarea : TagFields, IMyTagCreator
     {
-        private readonly string _name;
-        private readonly string _context;
-        private readonly string _cssClass;
-        private readonly string _placeholder;
-
-        private const string _style = "height: 110px;";
-
-        public MyCreatorTagTextarea(string name, string context, string cssClass, string placeholder)
-        {
-            _name = name;
-            _context = context;
-            _cssClass = cssClass;
-            _placeholder = placeholder;
-        }
+        public MyCreatorTagTextarea(string name = "", string placeholder = "", string cssClass = "", string type = "", string context = "", string id = "", string onClick = "", string style = "")
+    : base(name, placeholder, cssClass, type, context, id, onClick, style) { }
 
         public TagBuilder CreateTag()
         {
@@ -147,22 +146,10 @@ namespace SiteVisitka.HTML_Helpers
         }
     }
 
-    public class MyCreatorTagButton : IMyTagCreator
+    public class MyCreatorTagButton : TagFields, IMyTagCreator
     {
-        private readonly string _type;
-        private readonly string _context;
-        private readonly string _cssClass;
-        private readonly string _id;
-        private readonly string _onClick;
-
-        public MyCreatorTagButton(string type, string context, string id="", string onClick="", string cssClass="")
-        {
-            _type = type;
-            _context = context;
-            _cssClass = cssClass;
-            _id = id;
-            _onClick = onClick;
-        }
+        public MyCreatorTagButton(string name = "", string cssClass = "", string type = "", string context = "", string id = "", string onClick = "", string style = "")
+    : base(name, null, cssClass, type, context, id, onClick, style) { }
 
         public TagBuilder CreateTag()
         {
@@ -171,6 +158,22 @@ namespace SiteVisitka.HTML_Helpers
             tag.MergeAttribute("type", _type);
             tag.MergeAttribute("id", _id);
             tag.MergeAttribute("onClick", _onClick);
+            tag.InnerHtml.Append(_context);
+            return tag;
+        }
+    }
+
+    public class MyCreatorTagDiv : TagFields, IMyTagCreator
+    {
+        public MyCreatorTagDiv(string name = "",string cssClass = "", string type = "", string context = "", string id = "", string onClick = "", string style = "")
+    : base(name, null, cssClass, type, context, id, onClick, style) { }
+
+        public TagBuilder CreateTag()
+        {
+            TagBuilder tag = new("div");
+            tag.AddCssClass(_cssClass);
+            tag.MergeAttribute("id", _id);
+            tag.MergeAttribute("style", _style);
             tag.InnerHtml.Append(_context);
             return tag;
         }
