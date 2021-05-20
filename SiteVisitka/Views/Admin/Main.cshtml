@@ -29,13 +29,32 @@
 </div>
 
 <div class="container BoxCooments">
-	@foreach (Comment comment in Model.Comments.GroupBy(x => x.Approved))
+	@foreach (Comment comment in Model.Comments.OrderBy(x => x.Approved).ToList())
 	{
+		string comId = comment.Id.ToString();
+		string nameForFom = "comment" + comId;
+		IMyTagCreator[] myTags = new IMyTagCreator[2];
+		if (comment.Approved == false)
+		{
+			myTags[0] = new MyCreatorTagButton(type: "button", context: "одобрить", onClick: $"ApprovedCom({comId})", id: $"butApp{comId}");
+			myTags[1] = new MyCreatorTagDiv( style: "margin-top: 10px",
+				tags: new IMyTagCreator[]{
+					new MyCreatorTagButton(type: "button", context: "удалить", onClick: $"deleteCom({comId})", id: $"butDel{comId}"),
+					new MyCreatorTagInput(type: "checkbox", style: "margin-left: 20px", name: "exactlyDel"),
+					new MyCreatorTagDiv(id:$"status{comId}") 
+				}
+			);
+		}
+
+	<form name="@nameForFom">
 		@Html.CreateCommentBox(
 			new MyCreatorTagP(context: comment.Name),
 			new MyCreatorTagP(context: comment.Address),
-			new MyCreatorTagP(context: comment.Text)
+			new MyCreatorTagP(context: comment.Text),
+			myTags
 		)
+	</form>
 	}
+	<script src="~/js/ScriptForChangeComment.js"></script>
 </div>
 

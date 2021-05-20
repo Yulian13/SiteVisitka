@@ -47,15 +47,19 @@
 </div>
 
 <div class="container BoxCooments">
-	@Html.CreateCommentBox(
-		new MyCreatorTagInput(type:"text", cssClass: "commentField", name: "Name", placeholder:"Ваше имя"),
-		new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Address", placeholder: "Приблизительный адресс"),
-		new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context:"", placeholder: "содержимое коментария", style: "height: 110px;"),
-		new MyCreatorTagDiv(cssClass: "ErrorDiv", id:"ErrorName", context: "пустое поле имени"),
-		new MyCreatorTagDiv(cssClass: "ErrorDiv", id: "ErrorText", context: "пустое поле комментария"),
-		new MyCreatorTagDiv(cssClass: "OkDiv", id: "OkStatus", context: "комментарий отправлен"),
-		new MyCreatorTagButton(type:"button", context:"Отправить", onClick:"", id:"submitComment")
-	)
+	<form name="newComment">
+		@Html.CreateCommentBox(
+			new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Name", placeholder: "Ваше имя"),
+			new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Address", placeholder: "Приблизительный адресс"),
+			new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context: "", placeholder: "содержимое коментария", style: "height: 110px;"),
+			new MyCreatorTagDiv(cssClass: "ErrorDiv", id: "ErrorName", context: "пустое поле имени"),
+			new MyCreatorTagDiv(cssClass: "ErrorDiv", id: "ErrorText", context: "пустое поле комментария"),
+			new MyCreatorTagDiv(cssClass: "OkDiv", id: "OkStatus", context: "комментарий отправлен"),
+			new MyCreatorTagButton(type: "button", context: "Отправить", onClick: "PostComment()", id: "submitComment")
+		)
+	</form>
+	<script src="~/js/ScriptForApiAddComment.js"></script>
+
 	@foreach (Comment comment in Model.Comments.Where(x => x.Approved))
 	{
 		@Html.CreateCommentBox(

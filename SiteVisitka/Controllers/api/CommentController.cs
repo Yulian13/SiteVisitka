@@ -9,19 +9,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace SiteVisitka.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentsController : ControllerBase
+    public class CommentController : ControllerBase
     {
         private WorksContext db;
         private readonly ManagerLoginAdmin _managerLoginAdmin;
         private readonly MyFileLogger _logger;
 
-        public CommentsController(WorksContext context, ManagerLoginAdmin managerLoginAdmin, MyFileLogger logger)
+        public CommentController(WorksContext context, ManagerLoginAdmin managerLoginAdmin, MyFileLogger logger)
         {
             db = context;
             _managerLoginAdmin = managerLoginAdmin;
@@ -33,12 +31,13 @@ namespace SiteVisitka.Controllers
         {
             try
             {
-                return db.Comments.Where(x => x.Approved).ToList();
+                bool isOkStatus = _managerLoginAdmin.IsStatusOK(HttpContext);
+                return db.Comments.Where(x => (isOkStatus | x.Approved)).ToList();
             }
             catch (Exception ex)
             {
                 _logger.LogException(ex);
-                return null;
+                return new List<Comment>() { new Comment() { Name="Error" } };
             }
         }
 
@@ -46,7 +45,10 @@ namespace SiteVisitka.Controllers
         public ActionResult<Comment> Get(int id)
         {
             Comment comment = db.Comments.Find(id);
-            if (comment?.Approved ?? false || _managerLoginAdmin.IsStatusOK(HttpContext))
+            if (comment == null)
+                return NotFound();
+
+            if (comment.Approved || _managerLoginAdmin.IsStatusOK(HttpContext))
                 return comment;
             else
                 return Forbid();
@@ -55,9 +57,6 @@ namespace SiteVisitka.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Comment comment)
         {
-            if (!_managerLoginAdmin.IsStatusOK(HttpContext))
-                return Forbid();
-
             if (string.IsNullOrWhiteSpace(comment.Name))
                 ModelState.AddModelError("name", "пустое поле имени");
 
@@ -80,21 +79,21 @@ namespace SiteVisitka.Controllers
             {
                 _logger.LogException(ex);
 
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] bool isOK)
+        [HttpPut]
+        public ActionResult Put([FromBody] Comment com)
         {
             if (!_managerLoginAdmin.IsStatusOK(HttpContext))
                 return Forbid();
 
-            Comment comment = db.Comments.Find(id);
+            Comment comment = db.Comments.Find(com.Id);
             if (comment == null)
                 return NotFound();
 
-            comment.Approved = isOK;
+            comment.Approved = true;
             try
             {
                 db.SaveChanges();
@@ -106,8 +105,22 @@ namespace SiteVisitka.Controllers
             {
                 _logger.LogException(ex);
 
-                return BadRequest(ex);
+                return BadRequest();
             }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            if (!_managerLoginAdmin.IsStatusOK(HttpContext))
+                return Forbid();
+
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
+                return NotFound();
+
+            db.Comments.Remove(comment);
+            return Ok();
         }
     }
 }
