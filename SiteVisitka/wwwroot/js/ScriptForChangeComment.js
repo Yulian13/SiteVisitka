@@ -26,19 +26,11 @@
 async function ApprovedCom(Id){
 	var elems = GetElementsForPut(Id);
 
-	var com = {
-		Id: Id,
-		Name: "PUT",
-		Text: "Putting"
-
-	};
-	var obj = JSON.stringify(com);
-	var path = '/api/Comment';
+	var path = '/api/Comment/'+Id;
 	
 	const respons = await fetch(path, {
 			method: "PUT",
-			headers: { "Accept": "application/json", "Content-Type": "application/json" },
-			body: obj
+			headers: { "Accept": "application/json" },
 		}
 	);
 

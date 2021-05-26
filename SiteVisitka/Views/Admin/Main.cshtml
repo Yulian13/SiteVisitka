@@ -33,6 +33,7 @@
 	{
 		string comId = comment.Id.ToString();
 		string nameForFom = "comment" + comId;
+
 		IMyTagCreator[] myTags = new IMyTagCreator[2];
 		if (comment.Approved == false)
 		{
@@ -50,7 +51,7 @@
 		@Html.CreateCommentBox(
 			new MyCreatorTagP(context: comment.Name),
 			new MyCreatorTagP(context: comment.Address),
-			new MyCreatorTagP(context: comment.Text),
+			new MyCreatorTagP(context: comment.Text, cssClass: "commentField commentTextArea"),
 			myTags
 		)
 	</form>

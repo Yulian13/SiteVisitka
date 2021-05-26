@@ -12,20 +12,12 @@ namespace SiteVisitka.loggers
         private readonly string _exceptionLogPath;
         private static object _lock = new object();
 
-        public FileExeptionLogger(IConfiguration configuration)
-        {
-            _exceptionLogPath = Path.Combine(Directory.GetCurrentDirectory(), configuration[_jsonConfigNamePathLogException]);
-        }
+        public FileExeptionLogger(IConfiguration configuration) 
+            => _exceptionLogPath = Path.Combine(Directory.GetCurrentDirectory(), configuration[_jsonConfigNamePathLogException]);
 
-        public IDisposable BeginScope<TState>(TState state)
-        {
-            return null;
-        }
+        public IDisposable BeginScope<TState>(TState state) => null;
 
-        public bool IsEnabled(LogLevel logLevel)
-        {
-            return true;
-        }
+        public bool IsEnabled(LogLevel logLevel) => true;
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
@@ -34,6 +26,8 @@ namespace SiteVisitka.loggers
                 string message = DateTime.Now.ToString()
                     + Environment.NewLine
                     + exception.Message
+                    + "------------------------------------"
+                    + exception.StackTrace
                     + Environment.NewLine;
 
                 lock (_lock)

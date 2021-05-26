@@ -142,6 +142,12 @@ iframe {
 .commentField {
     background-color: #fddeb2;
     width: 100%;
+    border: solid black 1.5px;
+}
+
+.commentTextArea{
+    color: black;
+    padding: 5px;
 }
 
 .RowCommentField{

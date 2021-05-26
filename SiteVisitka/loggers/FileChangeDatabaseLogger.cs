@@ -12,19 +12,11 @@ namespace SiteVisitka.loggers
         private static object _lock = new object();
 
         public FileChangeDatabaseLogger(IConfiguration configuration)
-        {
-            _exceptionLogPath = Path.Combine(Directory.GetCurrentDirectory(), configuration[_jsonConfigNamePathLogChangeDatabase]);
-        }
+            => _exceptionLogPath = Path.Combine(Directory.GetCurrentDirectory(), configuration[_jsonConfigNamePathLogChangeDatabase]);
 
-        public IDisposable BeginScope<TState>(TState state)
-        {
-            return null;
-        }
+        public IDisposable BeginScope<TState>(TState state) => null;
 
-        public bool IsEnabled(LogLevel logLevel)
-        {
-            return true;
-        }
+        public bool IsEnabled(LogLevel logLevel) => true;
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {

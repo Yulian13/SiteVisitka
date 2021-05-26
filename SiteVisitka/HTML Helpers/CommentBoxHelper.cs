@@ -34,7 +34,7 @@ namespace SiteVisitka.HTML_Helpers
             TagBuilder divAddress = CreatTagDiv("col-md-6 Adress", tagAddress);
             TagBuilder divText = CreatTagDiv("col-md-12 TextComment", tagText);
             foreach(IMyTagCreator myTag in tagOthers)
-                divText.InnerHtml.AppendHtml(myTag.CreateTag());
+                divText.InnerHtml.AppendHtml(myTag?.CreateTag());
 
             TagBuilder divRowField = CreatTagDiv("row RowCommentField", divName, divAddress);
             TagBuilder divRowText = CreatTagDiv("row", divText);
@@ -110,6 +110,7 @@ namespace SiteVisitka.HTML_Helpers
             TagBuilder tag = new("p");
             tag.AddCssClass(_cssClass);
             tag.InnerHtml.Append(_context);
+            tag.MergeAttribute("style", _style);
             return tag;
         }
     }
@@ -158,6 +159,7 @@ namespace SiteVisitka.HTML_Helpers
         {
             TagBuilder tag = new("button");
             tag.AddCssClass(_cssClass);
+            tag.MergeAttribute("style", _style);
             tag.MergeAttribute("type", _type);
             tag.MergeAttribute("id", _id);
             tag.MergeAttribute("onClick", _onClick);

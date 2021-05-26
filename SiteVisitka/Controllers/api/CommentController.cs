@@ -83,13 +83,13 @@ namespace SiteVisitka.Controllers
             }
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Comment com)
+        [HttpPut("{id}")]
+        public ActionResult Put(int id)
         {
             if (!_managerLoginAdmin.IsStatusOK(HttpContext))
                 return Forbid();
 
-            Comment comment = db.Comments.Find(com.Id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
                 return NotFound();
 
@@ -118,9 +118,19 @@ namespace SiteVisitka.Controllers
             Comment comment = db.Comments.Find(id);
             if (comment == null)
                 return NotFound();
+            try
+            {
+                db.Comments.Remove(comment);
+                db.SaveChanges();
 
-            db.Comments.Remove(comment);
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogException(ex);
+
+                return BadRequest();
+            }
         }
     }
 }

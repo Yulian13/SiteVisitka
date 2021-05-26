@@ -49,13 +49,13 @@
 <div class="container BoxCooments">
 	<form name="newComment">
 		@Html.CreateCommentBox(
-			new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Name", placeholder: "Ваше имя"),
+			new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Name", placeholder: "Ваше имя*"),
 			new MyCreatorTagInput(type: "text", cssClass: "commentField", name: "Address", placeholder: "Приблизительный адресс"),
-			new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context: "", placeholder: "содержимое коментария", style: "height: 110px;"),
+			new MyCreatorTagTextarea(cssClass: "commentField", name: "Text", context: "", placeholder: "Ваш коментарий*", style: "height: 110px;"),
 			new MyCreatorTagDiv(cssClass: "ErrorDiv", id: "ErrorName", context: "пустое поле имени"),
 			new MyCreatorTagDiv(cssClass: "ErrorDiv", id: "ErrorText", context: "пустое поле комментария"),
 			new MyCreatorTagDiv(cssClass: "OkDiv", id: "OkStatus", context: "комментарий отправлен"),
-			new MyCreatorTagButton(type: "button", context: "Отправить", onClick: "PostComment()", id: "submitComment")
+			new MyCreatorTagButton(type: "button", context: "Отправить", onClick: "PostComment()", id: "submitComment", cssClass: "button", style: "font-size: 10pt; background: white;")
 		)
 	</form>
 	<script src="~/js/ScriptForApiAddComment.js"></script>
@@ -65,7 +65,7 @@
 		@Html.CreateCommentBox(
 			new MyCreatorTagP(context: comment.Name),
 			new MyCreatorTagP(context: comment.Address),
-			new MyCreatorTagP(context: comment.Text)
+			new MyCreatorTagP(context: comment.Text, cssClass: "commentField commentTextArea")
 		)
 	}
 </div>
