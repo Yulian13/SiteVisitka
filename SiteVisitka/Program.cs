@@ -20,6 +20,10 @@ namespace SiteVisitka
                 string message = DateTime.Now.ToString()
                     + Environment.NewLine
                     + ex.Message
+                    + Environment.NewLine
+                    + "------------------------------------"
+                    + Environment.NewLine
+                    + ex.StackTrace
                     + Environment.NewLine;
 
                 File.AppendAllText(path, message);

@@ -26,7 +26,9 @@ namespace SiteVisitka.loggers
                 string message = DateTime.Now.ToString()
                     + Environment.NewLine
                     + exception.Message
+                    + Environment.NewLine
                     + "------------------------------------"
+                    + Environment.NewLine
                     + exception.StackTrace
                     + Environment.NewLine;
 
